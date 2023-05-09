@@ -14,6 +14,7 @@ external String get visualViewport;
 abstract class WebAppJsImpl {
   external factory WebAppJsImpl();
 
+  external bool get isExpanded;
   external String get initData;
   external WebAppInitDataJsImpl get initDataUnsafe;
   external MainButtonJsImpl get MainButton;

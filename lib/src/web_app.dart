@@ -21,7 +21,7 @@ class TeleWebApp extends JsObjectWrapper<js.WebAppJsImpl> {
 
   // ThemeParams get themeParams => ThemeParams.fromJsObject(jsObject.themeParams);
 
-  // bool get isExpanded => jsObject.isExpanded;
+  bool get isExpanded => jsObject.isExpanded;
 
   // double get viewportHeight => jsObject.viewportHeight.toDouble();
 
