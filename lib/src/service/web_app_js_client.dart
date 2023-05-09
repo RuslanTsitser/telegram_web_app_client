@@ -25,7 +25,7 @@ abstract class WebAppJsImpl {
   external void ready();
   external void expand();
   external void close();
-  external void showPopup(PopupParams params, void Function(int value) callback);
+  external void showPopup(PopupParams params, void Function(dynamic value) callback);
 }
 
 @JS()

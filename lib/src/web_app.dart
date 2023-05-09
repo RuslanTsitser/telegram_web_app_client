@@ -45,14 +45,14 @@ class TeleWebApp extends JsObjectWrapper<js.WebAppJsImpl> {
 
   void close() => jsObject.close();
 
-  void showPopup(PopupParams params, void Function(int value) callback) => jsObject.showPopup(
+  void showPopup(PopupParams params, void Function(dynamic value) callback) => jsObject.showPopup(
         js.PopupParams(
             title: params.title,
             message: params.message,
             buttons: params.buttons?.map((e) {
               return js.PopupButton(id: e.id, type: e.type, text: e.text);
             }).toList()),
-        allowInterop((int value) => callback.call(value)),
+        allowInterop((dynamic value) => callback.call(value)),
       );
 }
 
