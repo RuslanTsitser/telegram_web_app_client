@@ -45,28 +45,52 @@ class TeleWebApp extends JsObjectWrapper<js.WebAppJsImpl> {
 
   void close() => jsObject.close();
 
-  void showPopup(PopupParams params, Function callback) => jsObject.showPopup(
-      js.PopupParams(
-          title: params.title,
-          message: params.message,
-          buttons: params.buttons?.map((e) => js.PopupButton(id: e.id, type: e.type, text: e.text)).toList()),
-      allowInterop(() => callback));
+  void showPopup(PopupParams params, void Function(int value) callback) => jsObject.showPopup(
+        js.PopupParams(
+            title: params.title,
+            message: params.message,
+            buttons: params.buttons?.map((e) {
+              return js.PopupButton(id: e.id, type: e.type, text: e.text);
+            }).toList()),
+        allowInterop((int value) => callback.call(value)),
+      );
 }
 
-class PopupParams extends JsObjectWrapper<js.PopupParams> {
-  PopupParams.fromJsObject(super.jsObject);
+class PopupParams {
+  PopupParams({
+    this.title,
+    this.message,
+    this.buttons,
+  });
 
-  String? get title => jsObject.title;
-  String? get message => jsObject.message;
-  List<PopupButton>? get buttons => jsObject.buttons?.map((e) => PopupButton.fromJsObject(e)).toList();
+  final String? title;
+  final String? message;
+  final List<PopupButton>? buttons;
 }
 
-class PopupButton extends JsObjectWrapper<js.PopupButton> {
-  PopupButton.fromJsObject(super.jsObject);
+/// `ìd` Identifier of the button, 0-64 characters. Set to empty string by default.
+/// If the button is pressed, its id is returned in the callback and the popupClosed event.
 
-  String? get id => jsObject.id;
-  String? get type => jsObject.type;
-  String? get text => jsObject.text;
+///
+/// `type` Type of the button. Set to default by default.
+/// Can be one of these values:
+/// - `default`, a button with the default style,
+/// - `ok`, a button with the localized text “OK”,
+/// - `close`, a button with the localized text “Close”,
+/// - `cancel`, a button with the localized text “Cancel”,
+/// - `destructive`, a button with a style that indicates a destructive action (e.g. “Remove”, “Delete”, etc.).
+///
+/// `text` The text to be displayed on the button, 0-64 characters. Required if type is default or destructive. Irrelevant for other types.
+class PopupButton {
+  PopupButton({
+    this.id,
+    this.text,
+    this.type,
+  });
+
+  final String? id;
+  final String? type;
+  final String? text;
 }
 
 class MainButton extends JsObjectWrapper<js.MainButtonJsImpl> {
