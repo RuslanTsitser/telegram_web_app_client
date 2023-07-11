@@ -45,6 +45,10 @@ class TeleWebApp extends JsObjectWrapper<js.WebAppJsImpl> {
 
   void close() => jsObject.close();
 
+  void disableClosingConfirmation() => jsObject.disableClosingConfirmation();
+
+  void enableClosingConfirmation() => jsObject.enableClosingConfirmation();
+
   void showPopup(PopupParams params, void Function(dynamic value) callback) => jsObject.showPopup(
         js.PopupParams(
             title: params.title,

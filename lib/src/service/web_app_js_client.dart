@@ -24,6 +24,8 @@ abstract class WebAppJsImpl {
   external void sendData(String data);
   external void ready();
   external void expand();
+  external void enableClosingConfirmation();
+  external void disableClosingConfirmation();
   external void close();
   external void showPopup(PopupParams params, void Function(dynamic value) callback);
 }
